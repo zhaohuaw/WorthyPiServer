@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import render_template
 import os
+import subprocess
 app = Flask(__name__)
 
 @app.route('/')
@@ -10,12 +11,12 @@ def index():
 
 @app.route('/radio/play')
 def radio_play():
-    os.system('mplayer http://bbcwssc.ic.llnwd.net/stream/bbcwssc_mp1_ws-einws')
+    subprocess.call('mplayer http://bbcwssc.ic.llnwd.net/stream/bbcwssc_mp1_ws-einws')
     print('radio play')
 
 @app.route('/radio/stop')
 def radio_stop():
-    os.system('mplayer q')
+    subprocess.call('mplayer q')
     print('radio stop')
 
 
