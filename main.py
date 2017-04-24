@@ -1,8 +1,10 @@
 from flask import Flask
 from flask import render_template
-import os
-import subprocess
+from radio import Radio
+
 app = Flask(__name__)
+myRadio = Radio()
+
 
 @app.route('/')
 def index():
@@ -11,15 +13,15 @@ def index():
 
 @app.route('/radio/play')
 def radio_play():
-    subprocess.call('mplayer http://bbcwssc.ic.llnwd.net/stream/bbcwssc_mp1_ws-einws')
-    print('radio play')
+    myRadio.play()
+    return 'play'
+
 
 @app.route('/radio/stop')
 def radio_stop():
-    subprocess.call('mplayer q')
-    print('radio stop')
-
+    myRadio.stop()
+    return 'stop'
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0',port=80)
+    app.run(host='0.0.0.0',port=8800)
     #app.run()
